@@ -255,6 +255,134 @@ nav {
     }
 }
 
+/* Services Section */
+.services-section {
+    padding: 5rem 2rem;
+    background-color: #fff;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.services-section h2,
+.about-section h2,
+.contact-section h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 1rem;
+    color: #111;
+}
+
+.section-intro {
+    text-align: center;
+    font-size: 1.1rem;
+    color: #666;
+    max-width: 800px;
+    margin: 0 auto 3rem;
+    line-height: 1.8;
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.service-card {
+    background-color: #f8f9fa;
+    padding: 2rem;
+    border-radius: 8px;
+    text-align: center;
+    transition: all 0.3s ease;
+    border: 1px solid #e9ecef;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    border-color: #ff3b3b;
+}
+
+.service-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.service-card h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: #111;
+}
+
+.service-card p {
+    color: #666;
+    line-height: 1.7;
+    font-size: 1rem;
+}
+
+/* About Section */
+.about-section {
+    padding: 5rem 2rem;
+    background-color: #f8f9fa;
+}
+
+.about-content {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.about-text {
+    margin-bottom: 3rem;
+}
+
+.about-text p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #555;
+    margin-bottom: 1.5rem;
+    text-align: justify;
+}
+
+.about-highlights {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.highlight-item {
+    background-color: #fff;
+    padding: 1.5rem;
+    border-radius: 8px;
+    border-left: 4px solid #ff3b3b;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.highlight-item strong {
+    display: block;
+    font-size: 1.1rem;
+    color: #111;
+    margin-bottom: 0.5rem;
+}
+
+.highlight-item p {
+    color: #666;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Contact Section */
+.contact-section {
+    padding: 5rem 2rem 0;
+    background-color: #fff;
+}
+
 /* Google Maps Section */
 .maps-section {
     width: 100%;
@@ -337,6 +465,33 @@ nav {
 
     .maps-section {
         height: 400px;
+    }
+
+    .services-section,
+    .about-section,
+    .contact-section {
+        padding: 3rem 1.5rem;
+    }
+
+    .services-section h2,
+    .about-section h2,
+    .contact-section h2 {
+        font-size: 2rem;
+    }
+
+    .services-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .about-highlights {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .about-text p {
+        text-align: left;
+        font-size: 1rem;
     }
 }
 
