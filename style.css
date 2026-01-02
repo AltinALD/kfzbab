@@ -141,13 +141,28 @@ nav {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-image: url('images/hero-bg.jpg');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
     margin-top: 80px;
+    overflow: hidden;
+    background-color: #111; /* Fallback background color */
 }
 
+/* Hero Slideshow container */
+.hero-slideshow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    transition: opacity 0.8s ease-in-out;
+    z-index: 0;
+    opacity: 0;
+    will-change: opacity;
+}
+
+/* Dark overlay for better text readability */
 .hero::before {
     content: '';
     position: absolute;
@@ -156,6 +171,7 @@ nav {
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.6);
+    z-index: 1;
 }
 
 .hero-content {
@@ -181,6 +197,7 @@ nav {
     color: #f0f0f0;
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
 }
+
 
 .trust-badges {
     display: flex;
@@ -435,8 +452,17 @@ nav {
 
     .hero {
         margin-top: 70px;
-        background-attachment: scroll;
+        height: 70vh;
         min-height: 500px;
+        max-height: 600px;
+    }
+
+    /* Mobile-optimized slideshow */
+    .hero-slideshow {
+        background-size: cover;
+        background-position: center center;
+        /* On mobile, we prioritize showing the center/main content */
+        object-fit: cover;
     }
 
     .hero h1 {
@@ -496,6 +522,17 @@ nav {
 }
 
 @media (max-width: 480px) {
+    .hero {
+        height: 60vh;
+        min-height: 400px;
+        max-height: 500px;
+    }
+
+    .hero-slideshow {
+        background-size: cover;
+        background-position: center center;
+    }
+
     .hero h1 {
         font-size: 1.75rem;
     }
@@ -507,6 +544,44 @@ nav {
     .call-btn-hero {
         padding: 0.875rem 2rem;
         font-size: 1rem;
+    }
+
+    .hero-content {
+        padding: 1.5rem;
+    }
+}
+
+/* Landscape orientation on mobile */
+@media (max-width: 768px) and (orientation: landscape) {
+    .hero {
+        height: 100vh;
+        min-height: 400px;
+        max-height: 600px;
+    }
+
+    .hero-slideshow {
+        background-size: cover;
+        background-position: center center;
+    }
+}
+
+/* Very small screens */
+@media (max-width: 360px) {
+    .hero {
+        min-height: 350px;
+        height: 55vh;
+    }
+
+    .hero-content {
+        padding: 1rem;
+    }
+
+    .hero h1 {
+        font-size: 1.5rem;
+    }
+
+    .hero .subtitle {
+        font-size: 0.9rem;
     }
 }
 
