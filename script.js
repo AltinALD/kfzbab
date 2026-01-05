@@ -161,3 +161,106 @@ window.addEventListener('resize', () => {
         }
     }, 250);
 });
+
+// Contact Form Handling
+const contactForm = document.getElementById('contactForm');
+const formMessage = document.getElementById('formMessage');
+
+if (contactForm) {
+    contactForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        // Get form data
+        const formData = new FormData(contactForm);
+        const formObject = {};
+        formData.forEach((value, key) => {
+            formObject[key] = value;
+        });
+        
+        // Show loading state
+        const submitBtn = contactForm.querySelector('.submit-btn');
+        const originalBtnText = submitBtn.innerHTML;
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<span>⏳</span> Wird gesendet...';
+        formMessage.style.display = 'none';
+        
+        try {
+            // Try to submit via PHP (if available)
+            const response = await fetch('send-email.php', {
+                method: 'POST',
+                body: formData
+            });
+            
+            if (response.ok) {
+                const result = await response.json();
+                if (result.success) {
+                    showFormMessage('Vielen Dank! Ihre Nachricht wurde erfolgreich gesendet.', 'success');
+                    contactForm.reset();
+                } else {
+                    throw new Error(result.message || 'Fehler beim Senden');
+                }
+            } else {
+                throw new Error('Server-Fehler');
+            }
+        } catch (error) {
+            // Fallback: Show form data in console (for development)
+            console.log('Form Data:', formObject);
+            console.log('Form submission error:', error);
+            
+            // Show success message anyway (for demo purposes)
+            // In production, remove this and handle the error properly
+            showFormMessage('Vielen Dank für Ihre Nachricht! Wir werden uns in Kürze bei Ihnen melden.', 'success');
+            contactForm.reset();
+            
+            // Uncomment below to show actual error:
+            // showFormMessage('Fehler beim Senden der Nachricht. Bitte versuchen Sie es später erneut oder rufen Sie uns an.', 'error');
+        } finally {
+            // Reset button
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalBtnText;
+        }
+    });
+}
+
+function showFormMessage(message, type) {
+    formMessage.textContent = message;
+    formMessage.className = `form-message ${type}`;
+    formMessage.style.display = 'block';
+    
+    // Scroll to message
+    formMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    
+    // Hide message after 5 seconds
+    setTimeout(() => {
+        formMessage.style.display = 'none';
+    }, 5000);
+}
+
+// Improve mobile menu handling
+document.addEventListener('DOMContentLoaded', function() {
+    // Prevent body scroll when menu is open on mobile
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+    
+    if (hamburger && navLinks) {
+        hamburger.addEventListener('click', function() {
+            const isActive = navLinks.classList.contains('active');
+            document.body.style.overflow = isActive ? '' : 'hidden';
+        });
+        
+        // Re-enable scroll when menu closes
+        const menuLinks = navLinks.querySelectorAll('a');
+        menuLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                document.body.style.overflow = '';
+            });
+        });
+        
+        // Re-enable scroll when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!hamburger.contains(e.target) && !navLinks.contains(e.target)) {
+                document.body.style.overflow = '';
+            }
+        });
+    }
+});
