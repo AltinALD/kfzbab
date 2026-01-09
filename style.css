@@ -234,11 +234,27 @@ nav {
 }
 
 .hero h1 {
-    font-size: 3rem;
+    width: 100%;
+    max-width: 1200px; /* Increased to allow more room */
+    
+    /* THE TRICK: Clamp makes it big on desktop and small on mobile so it stays on 1 line */
+    font-size: clamp(1rem, 5vw, 2.5rem); 
+    
     font-weight: 700;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     line-height: 1.2;
+    
+    /* Force one line */
+    white-space: nowrap; 
+    
+    /* Prevents the text from breaking the layout if the screen is too small */
+    overflow: hidden;
+    text-overflow: ellipsis; 
+    
+    /* Center it if your hero is centered */
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .hero .subtitle {
@@ -684,6 +700,101 @@ footer p {
 .footer-social a:hover svg {
     transform: scale(1.1);
     fill: #ff3b3b;
+}
+
+/* Owner style  */
+
+/* =========================
+   OWNER MESSAGE SECTION
+========================= */
+
+.owner-message {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.2rem;
+    max-width: 900px;
+    margin: 3rem auto;
+    padding: 1.5rem 1.8rem;
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+    border-left: 5px solid #e10600;
+}
+
+/* Owner photo */
+.owner-photo {
+    width: 170px;
+    height: 170px;
+    min-width: 170px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid #e10600;
+}
+
+/* Text container */
+.owner-info h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #111;
+    margin-bottom: 0.4rem;
+}
+
+.owner-info p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #555;
+    margin: 0;
+}
+
+/* =========================
+   TABLET
+========================= */
+@media (max-width: 768px) {
+    .owner-message {
+        gap: 1rem;
+        padding: 1.3rem 1.4rem;
+    }
+
+    .owner-photo {
+        width: 60px;
+        height: 60px;
+        min-width: 60px;
+    }
+
+    .owner-info h3 {
+        font-size: 1.1rem;
+    }
+
+    .owner-info p {
+        font-size: 0.95rem;
+    }
+}
+
+/* =========================
+   MOBILE
+========================= */
+@media (max-width: 480px) {
+    .owner-message {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 1.4rem 1.2rem;
+    }
+
+    .owner-photo {
+        width: 75px;
+        height: 75px;
+        min-width: 75px;
+        margin-bottom: 0.6rem;
+    }
+
+    .owner-info h3 {
+        font-size: 1.05rem;
+    }
+
+    .owner-info p {
+        font-size: 0.95rem;
+    }
 }
 
 /* Contact */
